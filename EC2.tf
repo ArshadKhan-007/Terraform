@@ -1,3 +1,11 @@
+# Terraform EC2 Instance Configuration
+# Step 1: Create a key pair by running commmand "ssh-keygen"
+# Step 2: Create a default VPC
+# Step 3: Create a security group
+# Step 4: Create an EC2 instance
+
+# Notes: Before creating any resource make sure to check that have access key and secret key configured.
+
 resource "aws_key_pair" "deployer" {
     key_name = "terraec2-key"
     public_key = file("terraec2-key.pub")
