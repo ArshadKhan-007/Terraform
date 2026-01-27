@@ -52,10 +52,14 @@ resource "aws_security_group" "my_security_group" {
 
 #ec2 instance creation
 resource "aws_instance" "Server" {
-  count = 2 #count is a meta argument that allows you to create multiple instances without copy and paste the same code
+  # count = 2 #count is a meta argument that allows you to create multiple instances without copy and paste the same code
+  for_each = tomap({
+    server1 = "t3.micro"
+    server2 = "t2.small"
+  })
   key_name        = aws_key_pair.deployer.key_name
   security_groups = [aws_security_group.my_security_group.name]
-  instance_type   = var.ec2_instance_type
+  instance_type   = each.value
   ami             = var.ec2_ami_id
   user_data       = file("install_nginx.sh")
 
@@ -65,6 +69,6 @@ resource "aws_instance" "Server" {
   }
 
   tags = {
-    name = "Server"
+    name = each.key
   }
 }
