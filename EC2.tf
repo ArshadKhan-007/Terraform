@@ -55,7 +55,7 @@ resource "aws_instance" "Server" {
   # count = 2 #count is a meta argument that allows you to create multiple instances without copy and paste the same code
   for_each = tomap({
     server1 = "t3.micro"
-    server2 = "t2.small"
+    server2 = "t2.micro"
   })
    # for_each() is a meta argument that allows you to create multiple instances with different configurations.
   # each.key will give you the key of the map and each.value will give you the value of the map.
