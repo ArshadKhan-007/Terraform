@@ -18,6 +18,18 @@ output "ec2_public_ip" {
   ]
 }
 
+output "ec2_public_dns" {
+  value = [
+    for instance in aws_instance.Server: instance.public_dns
+  ] 
+}
+
+output "ec2_private_ip" {
+  value = [
+    for instance in aws_instance.Server: instance.private_ip
+  ]
+}
+
 # Notes: Whenever you're using for_each you should use for loop to display the outputs.
 # Use count with for_each is not allowed.
 # Use count when you want to create multiple resources with the same configuration.
