@@ -78,3 +78,6 @@ resource "aws_instance" "Server" {
     name = each.key
   }
 }
+
+
+
