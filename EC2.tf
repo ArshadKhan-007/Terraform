@@ -57,17 +57,17 @@ resource "aws_instance" "Server" {
   #   server1 = "t3.micro"
   #   server2 = "t2.micro"
   # })
-   # for_each() is a meta argument that allows you to create multiple instances with different configurations.
+  # for_each() is a meta argument that allows you to create multiple instances with different configurations.
   # each.key will give you the key of the map and each.value will give you the value of the map.
   # Here, i have created two instances with different instance types.
   # count is different from for_each() as count create multiple instances with same configuration but for_each() create multiple instances with different configurations.
 
-  depends_on = [ aws_security_group.my_security_group, aws_key_pair.deployer ] #to ensure that the security group is created before the ec2 instance.
+  depends_on      = [aws_security_group.my_security_group, aws_key_pair.deployer] #to ensure that the security group is created before the ec2 instance.
   key_name        = aws_key_pair.deployer.key_name
   security_groups = [aws_security_group.my_security_group.name]
   instance_type   = var.ec2_instance_type
   ami             = var.ec2_ami_id
-  user_data       = file("install_nginx.sh") 
+  user_data       = file("install_nginx.sh")
 
   root_block_device {
     volume_size = var.ec2_root_storage_size
